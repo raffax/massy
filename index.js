@@ -10,8 +10,9 @@ server.get('/',function(req,res){
 });
 server.post('/',function(req,res){   
     console.log("HOOK STARTED");   
-    if(req.body.result) console.log(JSON.stringify(req.body.result));
-    if (req.body.result && req.body.result.action && req.body.result.action == "chetempochefa") {
+    if(req.body.result != null) {console.log(JSON.stringify(req.body.result));}
+    else {console.log("Post not containing result")}
+    if (req.body.result !=null && req.body.result.action != null && req.body.result.action == "chetempochefa") {
         res.json({
             speech: "Tempo bellissimo,sole a volontà",
             displayText: "Tempo bellissimo,sole a volontà",
@@ -22,7 +23,7 @@ server.post('/',function(req,res){
         res.json({
             speech: "Boh",
             displayText: "Boh",
-            source: req.body.result.action
+            source: "boh"
         });
     }
 })
