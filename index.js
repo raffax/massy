@@ -11,7 +11,7 @@ server.get('/',function(req,res){
 });
 server.post('/',function(req,res){   
     console.log("HOOK STARTED");   
-    res.json({speech:"Ciao!"});
+    res.json({fulfillmentText:"Ciao!"});
 })
 
 server.listen((process.env.PORT || 8000), function () {
