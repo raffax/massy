@@ -8,9 +8,10 @@ server.get('/',function(req,res){
     res.send('We are happy to see you using Chat Bot Webhook');
     console.log("Accesso GET ");
 });
-server.post('/',function(req,res){  
-    console.log("RICEVO POST REQ "+req.body.result);
-    if (req.body && req.body.result && req.body.result.action && req.body.result.action == "chetempochefa") {
+server.post('/',function(req,res){   
+    console.log("HOOK STARTED");   
+    if(req.body.result) console.log(JSON.stringify(req.body.result));
+    if (req.body.result && req.body.result.action && req.body.result.action == "chetempochefa") {
         res.json({
             speech: "Tempo bellissimo,sole a volontà",
             displayText: "Tempo bellissimo,sole a volontà",
