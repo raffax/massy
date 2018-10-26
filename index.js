@@ -14,13 +14,13 @@ server.get('/',function(req,res){
 });
 server.post('/',function(req,res){   
     console.log("HOOK STARTED"); 
-//    console.log(util.inspect(req.body, {showHidden: false, depth: null}))
+    console.log(util.inspect(req.body, {showHidden: false, depth: null}))
     try {
         var intento=req.body.queryResult.intent;
         if(intento.displayName=='GetWorkoutTime') {
             var tipo_fit=req.body.queryResult.parameters.Fitness;
-            var inizio_attivita=req.body.queryResult.parameters.date-period.startDate;
-            var fine_attivita=req.body.queryResult.parameters.date-period.endDate;
+            var inizio_attivita=req.body.queryResult.parameters('date-period').startDate;
+            var fine_attivita=req.body.queryResult.parameters('date-period').endDate;
             res.json({fulfillmentText:"Hai "+tipo_fit+" da "+inizio_attivita+" a "+fine_attivita});
         }
         else res.json({fulfillmentText:"Ciao, il webhook ti saluta."});
