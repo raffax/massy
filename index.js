@@ -17,6 +17,12 @@ server.post('/',function(req,res){
     console.log(util.inspect(req.body, {showHidden: false, depth: null}))
     try {
         var intento=req.body.queryResult.intent;
+        var payload=req.body.originalDetectIntentRequest.payload;
+        var sorgente=req.body.originalDetectIntentRequest.source;
+        var utente=payload.data.sender.id;
+        console.log("SORGENTE: "+sorgente);
+        console.log("UTENTE: "+utente);
+        console.log("PAYLOAD: "+util.inspect(payload, {showHidden: false, depth: null}))
         if(intento.displayName=='GetWorkoutTime') {
             var tipo_fit=req.body.queryResult.parameters.Fitness;
             var inizio_attivita=req.body.queryResult.parameters['date-period'].startDate;
