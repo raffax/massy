@@ -19,7 +19,7 @@ server.post('/',function(req,res){
         var intento=req.body.queryResult.intent;
         var payload=req.body.originalDetectIntentRequest.payload;
         var sorgente=req.body.originalDetectIntentRequest.source;
-        var utente=payload.data.sender.id;
+        var utente=payload.data? payload.data.sender.id : null;
         console.log("SORGENTE: "+sorgente);
         console.log("UTENTE: "+utente);
         console.log("PAYLOAD: "+util.inspect(payload, {showHidden: false, depth: null}))
