@@ -14,8 +14,21 @@ server.get('/',function(req,res){
 });
 server.post('/',function(req,res){   
     console.log("HOOK STARTED"); 
-    console.log(util.inspect(req.body, {showHidden: false, depth: null}))
-    res.json({fulfillmentText:"Ciao!"});
+//    console.log(util.inspect(req.body, {showHidden: false, depth: null}))
+    try {
+        var intento=req.body.queryResult.intent;
+        if(intento.displayName=='GetWorkoutTime') {
+            var tipo_fit=req.body.queryResult.parameters.Fitness;
+            var inizio_attivita=req.body.queryResult.parameters.startDate;
+            var fine_attivita=req.body.queryResult.parameters.endDate;
+            res.json({fulfillmentText:"Hai "+tipo_fit+" da "+inizio_attivita+" a "+fine_attivita});
+        }
+        else res.json({fulfillmentText:"Ciao, il webhook ti saluta."});
+    }
+    catch(err) {
+        console.log("Errore "+util.inspect(err,{showHidden: false, depth: null}));
+        res.json({fulfillmentText:"Ciao, ho un errore nel webhook."});
+    }
 })
 
 server.listen((process.env.PORT || 8000), function () {
